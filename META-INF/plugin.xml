@@ -37,7 +37,7 @@
     </component>
   </project-components>
   <actions>
-    <action id="Cvs.RevisionGraph" icon="/org/cvstoolbox/graph/images/graph_16.png" class="org.cvstoolbox.graph.CVSRevisionGraphAction" description="Renders complete revision history information in a directed graph of the selected file." text="Revision Graph...">
+    <action id="CvsRevisionGraphPlus.RevisionGraph" icon="/org/cvstoolbox/graph/images/graph_16.png" class="org.cvstoolbox.graph.CVSRevisionGraphAction" description="Renders complete revision history information in a directed graph of the selected file." text="Revision Graph...">
       <add-to-group group-id="CvsFilePopupGroup" anchor="last"/>
     </action>
   </actions>
