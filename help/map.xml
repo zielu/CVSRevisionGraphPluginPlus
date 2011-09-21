@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!--
+  ~ CVS Revision Graph Plus IntelliJ IDEA Plugin
+  ~
+  ~ Copyright (C) 2011, ?ukasz Zieli?ski
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+  ~ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  ~ PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  ~ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  ~ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  ~ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  ~ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  ~ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<!DOCTYPE map PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 2.0//EN"
+                     "http://java.sun.com/products/javahelp/map_2_0.dtd">
+
+<map version="1.0" xml:lang="en">
+	<mapID target="doc-config-general" url="docs/config-general.html"/>
+	<mapID target="doc-configuring-cvsRG" url="docs/configuring-cvsRG.html"/>
+	<mapID target="doc-cvsRG" url="docs/cvsRG.html"/>
+	<mapID target="img-config-general" url="images/config-general.png"/>
+	<mapID target="img-config-branchFilter" url="images/config-branchFilter.png"/>
+	<mapID target="img-config-mergeTags" url="images/config-mergeTags.png"/>
+	<mapID target="img-config-dateFilter" url="images/config-dateFilter.png"/>
+	<mapID target="img-config-tagFilter" url="images/config-tagFilter.png"/>
+	<mapID target="img-graph-addTag" url="images/graph-addTag.png"/>
+	<mapID target="img-graph-dateFilter" url="images/graph-dateFilter.png"/>
+	<mapID target="img-graph-moveMergeTags" url="images/graph-moveMergeTags.png"/>
+	<mapID target="img-graph-removeTag" url="images/graph-removeTag.png"/>
+	<mapID target="img-graph-tagFilter" url="images/graph-tagFilter.png"/>
+	<mapID target="img-graph_16" url="images/graph_16.png"/>
+	<mapID target="img-graph_24" url="images/graph_24.png"/>
+	<mapID target="img-revisionGraph" url="images/revisionGraph.png"/>
+	<mapID target="doc-config-dateFilter" url="docs/config-dateFilter.html"/>
+	<mapID target="doc-config-tagFilter" url="docs/config-tagFilter.html"/>
+	<mapID target="doc-config-branchFilter" url="docs/config-branchFilter.html"/>
+	<mapID target="doc-config-mergeTags" url="docs/config-mergeTags.html"/>
+	<mapID target="doc-taggingOperations" url="docs/taggingOperations.html"/>
+	<mapID target="doc-tagFilter" url="docs/tagFilter.html"/>
+	<mapID target="doc-dateFilter" url="docs/dateFilter.html"/>
+</map>

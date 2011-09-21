@@ -1,0 +1,144 @@
+<!--
+  ~ CVS Revision Graph Plus IntelliJ IDEA Plugin
+  ~
+  ~ Copyright (C) 2011, Łukasz Zieliński
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+  ~ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  ~ PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  ~ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  ~ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  ~ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  ~ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  ~ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin>
+  <name>CVS Revision Graph Plus</name>
+  <description>
+  <![CDATA[
+      Draws a graph of all revisions of the current CVS controlled file.
+      The graph can be zoomed in and out to better manage large revision graph history.
+      Not all CVS servers support merge history so if you follow a convention of adding &quot;Merge From: [branchName]&quot; and &quot;Revision: [revisionNumber]&quot; in your commit message when you check in a merged file, the revision graph will draw red merge arrows showing the merge graphically.
+      Right click editor and choose Revision Graph... from within the CVS menu.  Offers the ability to add and remove tags to specific revisions in the graph regardless of what is in the sandbox.  Provides simple management of merge tags based on a configurable merge tag naming convention.
+      Allows retrieval of any selected revision into your current working copy.  Selecting an edge connecting two revisions will automatically perform a comparison.  The revision graph can be configured in the configuration dialog to not show tags at all or to filter in or out specified tags based on a regular expression.
+      It can also be configured to filter in or out specified branches. The tag and branch filters can also be dynamically changed while viewing the revision graph.  The configuration dialog also contains a revision date filter and the graph can be dynamically filtered with dates.
+      <p>Based on Shawn Castrianni's excellent plugin and modified to run with Idea 10+.</p>
+  ]]>
+  </description>
+  <version>2.31</version>
+  <vendor logo="/org/cvstoolbox/graph/images/graph_24.png" email="cvstoolbox@gmail.com">Łukasz Zieliński</vendor>
+  <category>VCS Integration</category>
+  <depends>CVS</depends>
+  <project-components>
+    <component>
+      <implementation-class>org.cvstoolbox.graph.CVSRevisionGraphProjectComponent</implementation-class>
+    </component>
+  </project-components>
+  <actions>
+    <action id="Cvs.RevisionGraph" icon="/org/cvstoolbox/graph/images/graph_16.png" class="org.cvstoolbox.graph.CVSRevisionGraphAction" description="Renders complete revision history information in a directed graph of the selected file." text="Revision Graph...">
+      <add-to-group group-id="CvsFilePopupGroup" anchor="last"/>
+    </action>
+  </actions>
+  <idea-version since-build="99.5"/>
+  <helpset file="CVSRevisionGraphPlusHelp.jar" path="/helpset.hs" />
+  <change-notes>
+    <![CDATA[
+    <ul>
+      <li>2.31
+        <ol>
+          <li>Recompiled for Idea 10.</li>
+        </ol>
+      </li>
+      <li>2.30
+        <ol>
+          <li>Added online help.</li>
+        </ol>
+      </li>
+      <li>2.20
+        <ol>
+          <li>Enhanced layout algorithm to reduce the overall width needed.</li>
+          <li>Fixed bug in branch filters.</li>
+        </ol>
+      </li>
+      <li>2.11
+        <ol>
+          <li>Added change notes to plugin descriptor.</li>
+          <li>Fixed bug in revision date filters.</li>
+        </ol>
+      </li>
+      <li>2.10
+        <ol>
+          <li>Added revision date filtering both as a default in the configuration dialog and dynamically with a toolbar button in the graph dialog.</li>
+          <li>Both filtering in and out and after and/or before date filtering supported.</li>
+        </ol>
+      </li>
+      <li>2.00
+        <ol>
+          <li>Improved features of filtering tags by specified whether it is a filter in or out.</li>
+          <li>Added dynamic changing of the tag filter.</li>
+          <li>Added new branch filtering in configuration dialog.</li>
+          <li>Added dynamic changing of the branch filter.</li>
+        </ol>
+      </li>
+      <li>1.80
+        <ol>
+          <li>Added the ability to click on an edge connecting two revisions and perform a comparison.</li>
+          <li>Added more options in the configuration dialog to not show tags inside graph cells or to filter out specified tags via a regular expression.</li>
+        </ol>
+      </li>
+      <li>1.70
+        <ol>
+          <li>Added the ability to zoom in and out of the revision graph.</li>
+          <li>Added the ability to retrieve any selected revision into your working copy.</li>
+          <li>This would make it easy to check back in an old revision.</li>
+        </ol>
+      </li>
+      <li>1.60
+        <ol>
+          <li>Added the ability to manage merge tags based on a configurable merge tag naming convention.</li>
+          <li>The plugin configuration dialog allows you to specify whether you prefer a 1 or 2 tag merging convention and the format of those merge tags.</li>
+          <li>This will be used during the Move Merge Tags operation that is part of the toolbar of the CVS Revision Graph.</li>
+        </ol>
+      </li>
+      <li>1.50
+        <ol>
+          <li>Added ability to add and remove tags from specific selected revisions in the graph.</li>
+          <li>This required a HUGE hack of the CVS integration plugin so it may not be stable on all versions of IntelliJ.</li>
+        </ol>
+      </li>
+      <li>1.41
+        <ol>
+          <li>Fix minor bug where comparison of two files wouldn't always put the lower rev number on the left.</li>
+          <li>Also, IntelliJ 7 fixed a typo in the OpenAPI causing incompatibility. Fixed that.</li>
+        </ol>
+      </li>
+      <li>1.4
+        <ol>
+          <li>Added compare and refresh actions on the toolbar.</li>
+          <li>Compare can compare any two selected revisions in the graph.</li>
+          <li>Refresh will recalculate the graph if the repository changes while the graph is active.</li>
+        </ol>
+      </li>
+      <li>1.3
+        <ol>
+          <li>Switched graph engine to JGraph to drastically improve scrolling performance and to avoid its bug in IntelliJ 6 OpenAPI.</li>
+        </ol>
+      </li>
+      <li>1.1
+        <ol>
+          <li>Added support for IntelliJ 6.</li>
+          <li>Added maximize button to auto size the dialog to fit the actual size of the graph.</li>
+        </ol>
+      </li>
+      <li>1.0
+        <ol>
+          <li>First pass at a revision graph plugin for CVS.</li>
+          <li>This will be expanded to be work with any VCS implementation later.</li>
+        </ol>
+      </li>
+    </ul>
+    ]]>
+  </change-notes>
+</idea-plugin>

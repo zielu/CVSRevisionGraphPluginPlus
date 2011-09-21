@@ -1,0 +1,79 @@
+<!--
+  ~ CVS Revision Graph Plus IntelliJ IDEA Plugin
+  ~
+  ~ Copyright (C) 2011, Łukasz Zieliński
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+  ~ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  ~ PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  ~ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  ~ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  ~ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  ~ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  ~ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <meta name="generator" content="Helen">
+    <title>IntelliJad</title>
+  </head>
+  <body>
+    <div class="mainheader">
+      CVS Revision Graph
+    </div>
+    <div style=" margin-bottom: 5px; margin-top: 5px;">
+      CVS Revision Graph&nbsp;is a plugin for IntelliJ IDEA 6/7 that provides the ability to render
+      a directed graph representation of the revision history of a file in a CVS&nbsp;repository.
+      &nbsp;In provides similar information to the Show History window, but in picture form.
+      &nbsp;This provides a view more easily understood as a file's revision history gets cluttered
+      with branching and merging. &nbsp;A revision graph can get large and slow to display.
+      &nbsp;Therefore, filters can be applied to help remedy this problem. &nbsp;The revision date
+      filter provides the option to filter in or out by commit date before and/or after a specified
+      filter date. &nbsp;The tag filter provides the option to control which CVS&nbsp;tags are
+      shown/hidden inside each revision node. &nbsp;The branch filter provides the option to filter
+      in or out entire parallel development lines or branches. &nbsp;All of these filters have
+      default values that can be specified in the settings dialog.<br>
+      <br>
+       CVS does not store merge history to allow it to know which revision was merged from one
+      branch to another. &nbsp;However, if a specific commit message pattern is followed for merged
+      files of the form:<br>
+      <br>
+       Merge From: [branchName]<br>
+       Revision: [revisionNumber]<br>
+      <br>
+       then the revision graph will draw red merge arrows connecting the source and target of the
+      merge.<br>
+      <br>
+       Additional operations can be performed within the revision graph window to compare any two
+      selected revisions, to retrieve a selected revision into the active editor, and to add/remove
+      tags.
+    </div>
+    <div class="sectionheader">
+      Example
+    </div>
+    <div style=" margin-bottom: 5px; margin-top: 5px;">
+      <center>
+        <img alt="Example Revision Graph" src="../images/revisionGraph.png"><br>
+      </center>
+    </div>
+    <div class="sectionheader">
+      Resources
+    </div>
+    <div style=" margin-bottom: 5px; margin-top: 5px;">
+      <ul>
+        <li>
+          CVS Manual: &nbsp;<a href=
+          "http://ximbiot.com/cvs/manual">http://ximbiot.com/cvs/manual</a>
+        </li>
+        <li>
+          CVS Revision Graph&nbsp;homepage: &nbsp;<a href=
+          "http://www.jetbrains.net/confluence/display/CONTEST/CVS+Revision+Graph">http://www.jetbrains.net/confluence/display/CONTEST/CVS+Revision+Graph</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

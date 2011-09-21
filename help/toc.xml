@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!--
+  ~ CVS Revision Graph Plus IntelliJ IDEA Plugin
+  ~
+  ~ Copyright (C) 2011, ?ukasz Zieli?ski
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+  ~ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  ~ PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  ~ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  ~ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  ~ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  ~ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  ~ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<!DOCTYPE toc PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 2.0//EN"
+                     "http://java.sun.com/products/javahelp/toc_2_0.dtd">
+
+<toc version="2.0">
+	<tocitem text="CVS Revision Graph" target="doc-cvsRG" image="img-graph_16">
+		<tocitem text="Configuring CVS Revision Graph" target="doc-configuring-cvsRG">
+			<tocitem text="General" target="doc-config-general" />
+			<tocitem text="Date Filter" target="doc-config-dateFilter" />
+			<tocitem text="Tag Filter" target="doc-config-tagFilter" />
+			<tocitem text="Branch Filter" target="doc-config-branchFilter" />
+			<tocitem text="Merge Tags" target="doc-config-mergeTags" />
+		</tocitem>
+		<tocitem text="Tagging Operations" target="doc-taggingOperations" />
+		<tocitem text="Tag Filter" target="doc-tagFilter" />
+		<tocitem text="Date Filter" target="doc-dateFilter" />
+	</tocitem>
+</toc>

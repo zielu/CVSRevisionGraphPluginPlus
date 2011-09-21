@@ -1,0 +1,92 @@
+<!--
+  ~ CVS Revision Graph Plus IntelliJ IDEA Plugin
+  ~
+  ~ Copyright (C) 2011, Łukasz Zieliński
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+  ~ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  ~ PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  ~ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  ~ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  ~ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  ~ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  ~ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <meta name="generator" content="Helen">
+    <title>Merge Tags</title>
+  </head>
+  <body>
+    <div class="mainheader">
+      Merge Tags
+    </div>
+    <div style=" margin-bottom: 5px; margin-top: 5px;">
+      Most developers use CVS&nbsp;tags to help with merging. &nbsp;Some use a single tag
+      convention while other use a 2 tag convention. &nbsp;Typically a single tag convention is
+      where a a tag is placed on the revision where the last merge was completed. &nbsp;Because CVS
+      does not store merge history, this is needed to remember where the last merge was complete so
+      that any subsequent merges can continue where it was left off last time. &nbsp;Therefore the
+      merge is performed from the tag to the last revision in the source branch.<br>
+      <br>
+       Typically a 2 tag convention is used where a BEFORE&nbsp;tag and an AFTER&nbsp;tag is used.
+      &nbsp;A merge occurs by first moving the BEFORE&nbsp;tag to the desired final revision in the
+      source branch. &nbsp;This is usually the last revision in the source branch (as in the single
+      tag convention). &nbsp;The AFTER&nbsp;tag remains on where the last merge was completed.
+      &nbsp;Then the merge is performed from the AFTER&nbsp;tag to the BEFORE tag. &nbsp;Once the
+      merge is completed, the AFTER&nbsp;tag is then moved down to the BEFORE tag. &nbsp;One
+      advantage of having the BEFORE&nbsp;tag is to allow a full repository merge WHILE developers
+      are still checking in code on the source branch. &nbsp;The BEFORE&nbsp;tag will not move as
+      developers checkin new revisions on the source branch such that the merge process (sometimes
+      taking a while to review merge changes and resolving conflicts) will not become a moving
+      target.<br>
+      <br>
+       The naming convention is used in the Move Merge Tags operation from within the revision
+      graph window. &nbsp;The supported wildcards are:<br>
+       
+      <table width="988" cellpadding="0" border="1" cellspacing="0">
+        <tr>
+          <th width="371">
+            Wildcard
+          </th>
+          <th width="871">
+            Definition
+          </th>
+        </tr>
+        <tr>
+          <td align="center" width="371">
+            $T
+          </td>
+          <td width="871">
+            Represents the word AFTER or BEFORE (in a 2 tag merging convention only)
+          </td>
+        </tr>
+        <tr>
+          <td align="center" width="371">
+            $S
+          </td>
+          <td width="871">
+            Represents the source branch name
+          </td>
+        </tr>
+        <tr>
+          <td align="center" width="371">
+            $D
+          </td>
+          <td width="871">
+            Represents the destination branch name
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div style=" margin-bottom: 5px; margin-top: 5px;">
+      <center>
+        <img alt="Merge Tags" src="../images/config-mergeTags.png">
+      </center>
+    </div>
+  </body>
+</html>
