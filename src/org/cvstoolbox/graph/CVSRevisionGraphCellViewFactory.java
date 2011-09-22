@@ -19,6 +19,7 @@ import com.intellij.cvsSupport2.history.CvsFileRevision;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.history.VcsFileRevision;
 import info.clearthought.layout.TableLayout;
+import org.cvstoolbox.graph.revisions.BranchRevision;
 import org.jgraph.JGraph;
 import org.jgraph.graph.CellView;
 import org.jgraph.graph.CellViewRenderer;

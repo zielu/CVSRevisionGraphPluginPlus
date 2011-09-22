@@ -18,6 +18,7 @@ package org.cvstoolbox.graph;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vcs.AbstractVcs;
@@ -28,34 +29,38 @@ import com.intellij.openapi.vcs.history.VcsHistoryProvider;
 import com.intellij.openapi.vfs.VirtualFile;
 
 public class CVSRevisionGraphAction extends AnAction {
-  public void actionPerformed(AnActionEvent ae)
-  {
-    Project project = null;
-    VirtualFile file = null;
-    try {
-      project = PlatformDataKeys.PROJECT.getData(ae.getDataContext());
-      file = PlatformDataKeys.VIRTUAL_FILE.getData(ae.getDataContext());
-      ProjectLevelVcsManager vcsManager = ProjectLevelVcsManager.getInstance(project);
-      AbstractVcs vcs = vcsManager.getVcsFor(file);
-      VcsHistoryProvider histProvider = vcs.getVcsHistoryProvider();
-      VcsContextFactory vcsContext = VcsContextFactory.SERVICE.getInstance();
-      FilePath filePath = vcsContext.createFilePathOn(file);
-      CVSRevisionGraph dialog = new CVSRevisionGraph(project,filePath,histProvider);
-      dialog.pack();
-      dialog.show();
-    } catch(Throwable t) {
-      t.printStackTrace();
-      String title = "Revision Graph Error";
-      String message;
-      if(file != null)
-        message = "Error obtaining information necessary to calculate revision graph for file: " + file.getName();
-      else
-        message = "Error obtaining information necessary to calculate revision graph for current file";
-      message += "\n\n" + t.getMessage();
-      if(project != null)
-        Messages.showErrorDialog(project,message,title);
-      else
-        Messages.showErrorDialog(message,title);
+    private final Logger LOG = Logger.getInstance("#org.cvstoolbox.graph.CVSRevisionGraphAction");
+
+    public void actionPerformed(AnActionEvent ae) {
+        Project project = null;
+        VirtualFile file = null;
+        try {
+            project = PlatformDataKeys.PROJECT.getData(ae.getDataContext());
+            file = PlatformDataKeys.VIRTUAL_FILE.getData(ae.getDataContext());
+            ProjectLevelVcsManager vcsManager = ProjectLevelVcsManager.getInstance(project);
+            AbstractVcs vcs = vcsManager.getVcsFor(file);
+            VcsHistoryProvider histProvider = vcs.getVcsHistoryProvider();
+            VcsContextFactory vcsContext = VcsContextFactory.SERVICE.getInstance();
+            FilePath filePath = vcsContext.createFilePathOn(file);
+            CVSRevisionGraph dialog = new CVSRevisionGraph(project, filePath, histProvider);
+            dialog.pack();
+            dialog.show();
+        } catch (Throwable t) {
+            LOG.error(t);
+
+            String title = "Revision Graph Error";
+            String message;
+            if (file != null) {
+                message = "Error obtaining information necessary to calculate revision graph for file: " + file.getName();
+            } else {
+                message = "Error obtaining information necessary to calculate revision graph for current file";
+            }
+            message += "\n\n" + t.getMessage();
+            if (project != null) {
+                Messages.showErrorDialog(project, message, title);
+            } else {
+                Messages.showErrorDialog(message, title);
+            }
+        }
     }
-  }
 }

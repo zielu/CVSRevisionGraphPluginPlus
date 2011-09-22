@@ -20,6 +20,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.IconLoader;
 import info.clearthought.layout.TableLayout;
+import org.cvstoolbox.graph.revisions.BranchRevision;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.AbstractAction;
@@ -34,6 +35,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.Vector;
@@ -52,13 +54,13 @@ public class CVSMoveMergeTagsOptions extends DialogWrapper implements ActionList
   protected Project _project = null;
   protected Vector<String> _branches = null;
 
-  public CVSMoveMergeTagsOptions(Project project,Set<BranchRevision> branchSet)
+  public CVSMoveMergeTagsOptions(Project project, Collection<BranchRevision> branchSet)
   {
     super(project,false);
     setTitle("Move Merge Tags Options");
     setModal(true);
     _project = project;
-    _branches = new Vector<String>();
+    _branches = new Vector<String>(branchSet.size());
     for(BranchRevision brev : branchSet)
       _branches.add(brev.getName());
     Collections.sort(_branches);

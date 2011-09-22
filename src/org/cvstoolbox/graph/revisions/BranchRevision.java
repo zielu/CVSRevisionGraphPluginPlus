@@ -13,7 +13,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.cvstoolbox.graph;
+package org.cvstoolbox.graph.revisions;
 
 public class BranchRevision {
     private final String _name;
