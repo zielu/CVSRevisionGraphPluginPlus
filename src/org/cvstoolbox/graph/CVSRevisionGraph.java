@@ -1066,7 +1066,7 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
   protected class CompareAction extends AnAction {
     public CompareAction()
     {
-      super("Compare Revisions","Compare Revisions",IconLoader.getIcon("/org/cvstoolbox/graph/images/compare.png"));
+      super("Compare Revisions","Compare Revisions",IconLoader.getIcon("/actions/diff.png"));
       registerCustomShortcutSet(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK, getRootPane());
     }
 
