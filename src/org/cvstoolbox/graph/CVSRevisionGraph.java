@@ -75,10 +75,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -1067,6 +1067,7 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
     public CompareAction()
     {
       super("Compare Revisions","Compare Revisions",IconLoader.getIcon("/org/cvstoolbox/graph/images/compare.png"));
+      registerCustomShortcutSet(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK, getRootPane());
     }
 
     public void actionPerformed(AnActionEvent ae)
