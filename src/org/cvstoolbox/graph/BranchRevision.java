@@ -16,8 +16,8 @@
 package org.cvstoolbox.graph;
 
 public class BranchRevision {
-    protected String _name = null;
-    protected String _revision = null;
+    private final String _name;
+    private final String _revision;
 
     public BranchRevision(String name,String revision)
     {

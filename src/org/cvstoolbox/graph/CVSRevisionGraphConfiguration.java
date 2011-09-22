@@ -15,31 +15,22 @@
 
 package org.cvstoolbox.graph;
 
-import java.awt.Dimension;
-import java.awt.Insets;
-import java.util.List;
-import java.util.ArrayList;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.ui.components.JBList;
+import org.cvstoolbox.graph.util.CalendarClockDialog;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JList;
-import javax.swing.DefaultListModel;
 import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-
-import com.intellij.openapi.ui.Messages;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import org.cvstoolbox.graph.util.CalendarClockDialog;
+import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CVSRevisionGraphConfiguration {
     private JCheckBox _useTwoTagConventionCB;
@@ -49,7 +40,7 @@ public class CVSRevisionGraphConfiguration {
     private JPanel _mainPanel;
     private JTextField _tagFilterTF;
     private JCheckBox _showTagsCB;
-    private JList _branchFilterL;
+    private JBList _branchFilterL;
     private JButton _addBranchB;
     private JButton _removeBranchB;
     private JRadioButton _showBranchR;
@@ -311,7 +302,7 @@ public class CVSRevisionGraphConfiguration {
     }
 
     private void createUIComponents() {
-        _branchFilterL = new JList(new DefaultListModel());
+        _branchFilterL = new JBList(new DefaultListModel());
     }
 
 }

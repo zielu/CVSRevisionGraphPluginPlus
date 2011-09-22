@@ -15,25 +15,25 @@
 
 package org.cvstoolbox.graph;
 
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.util.IconLoader;
+import info.clearthought.layout.TableLayout;
+import org.cvstoolbox.graph.util.CalendarClockDialog;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
-
-import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.IconLoader;
-import org.cvstoolbox.graph.util.CalendarClockDialog;
-import info.clearthought.layout.TableLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DateFilterOptions extends DialogWrapper {
   protected JRadioButton _showTagR = null;

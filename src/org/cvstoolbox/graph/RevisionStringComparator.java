@@ -15,9 +15,9 @@
 
 package org.cvstoolbox.graph;
 
-import java.util.Comparator;
-
 import com.intellij.openapi.vcs.history.VcsFileRevision;
+
+import java.util.Comparator;
 
 public class RevisionStringComparator implements Comparator<Object> {
   public int compare(Object o1,Object o2)

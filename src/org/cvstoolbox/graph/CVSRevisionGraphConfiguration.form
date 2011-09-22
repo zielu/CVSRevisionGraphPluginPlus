@@ -359,7 +359,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="c2bcf" class="javax.swing.JList" binding="_branchFilterL" custom-create="true">
+                  <component id="c2bcf" class="com.intellij.ui.components.JBList" binding="_branchFilterL" custom-create="true">
                     <constraints/>
                     <properties>
                       <visibleRowCount value="6"/>

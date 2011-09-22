@@ -15,18 +15,10 @@
 
 package org.cvstoolbox.graph;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JTextArea;
-
+import com.intellij.cvsSupport2.history.CvsFileRevision;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vcs.history.VcsFileRevision;
+import info.clearthought.layout.TableLayout;
 import org.jgraph.JGraph;
 import org.jgraph.graph.CellView;
 import org.jgraph.graph.CellViewRenderer;
@@ -34,10 +26,17 @@ import org.jgraph.graph.DefaultCellViewFactory;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.VertexRenderer;
 import org.jgraph.graph.VertexView;
-import com.intellij.cvsSupport2.history.CvsFileRevision;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vcs.history.VcsFileRevision;
-import info.clearthought.layout.TableLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class CVSRevisionGraphCellViewFactory extends DefaultCellViewFactory {
   public static final String DEAD_STATE = "dead";
@@ -269,7 +268,7 @@ public class CVSRevisionGraphCellViewFactory extends DefaultCellViewFactory {
         _ta.setVisible(true);
         _tl.setRow(1,TableLayout.PREFERRED);
         _tl.setRow(2,TableLayout.PREFERRED);
-        StringBuffer labels = new StringBuffer();
+        StringBuilder labels = new StringBuilder();
         for(String revLabel : revLabels) {
           if(labels.length() != 0)
             labels.append("\n");

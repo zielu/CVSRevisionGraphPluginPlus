@@ -46,9 +46,15 @@
   <change-notes>
     <![CDATA[
     <ul>
+      <li>2.32
+        <ol>
+          <li>Code cleanup.</li>
+          <li>Minor GUI adjustments.</li>
+        </ol>
+      </li>
       <li>2.31
         <ol>
-          <li>Recompiled for Idea 10.</li>
+          <li>Recompiled for Idea 10+.</li>
         </ol>
       </li>
       <li>2.30

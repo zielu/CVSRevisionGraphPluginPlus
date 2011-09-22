@@ -15,12 +15,13 @@
 
 package org.cvstoolbox.graph;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.Vector;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.IconLoader;
+import info.clearthought.layout.TableLayout;
+import org.jetbrains.annotations.Nullable;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -31,13 +32,11 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.IconLoader;
-import info.clearthought.layout.TableLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.Set;
+import java.util.Vector;
 
 public class CVSMoveMergeTagsOptions extends DialogWrapper implements ActionListener {
   public static final String MOVE_BEFORE_PREFIX = "Move BEFORE tag";

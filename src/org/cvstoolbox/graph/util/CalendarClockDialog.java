@@ -15,20 +15,19 @@
 
 package org.cvstoolbox.graph.util;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
+import com.intellij.openapi.ui.DialogWrapper;
+import org.cvstoolbox.graph.CVSRevisionGraph;
+import org.jetbrains.annotations.Nullable;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-
-import org.jetbrains.annotations.Nullable;
-import org.cvstoolbox.graph.CVSRevisionGraph;
-import com.intellij.openapi.ui.DialogWrapper;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CalendarClockDialog extends DialogWrapper {
   protected CalendarChooser _calChooser = null;

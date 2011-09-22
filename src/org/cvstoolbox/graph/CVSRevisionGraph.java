@@ -15,50 +15,6 @@
 
 package org.cvstoolbox.graph;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
-import com.intellij.openapi.vcs.history.VcsRevisionNumber;
-import org.jetbrains.annotations.Nullable;
-import org.jgraph.JGraph;
-import org.jgraph.event.GraphSelectionEvent;
-import org.jgraph.event.GraphSelectionListener;
-import org.jgraph.graph.CellView;
-import org.jgraph.graph.DefaultEdge;
-import org.jgraph.graph.DefaultGraphCell;
-import org.jgraph.graph.DefaultGraphModel;
-import org.jgraph.graph.DefaultPort;
-import org.jgraph.graph.Edge;
-import org.jgraph.graph.GraphCell;
-import org.jgraph.graph.GraphConstants;
-import org.jgraph.graph.GraphLayoutCache;
 import com.intellij.cvsSupport2.cvsExecution.CvsOperationExecutor;
 import com.intellij.cvsSupport2.cvsExecution.CvsOperationExecutorCallback;
 import com.intellij.cvsSupport2.cvshandlers.CommandCvsHandler;
@@ -88,11 +44,55 @@ import com.intellij.openapi.vcs.FilePath;
 import com.intellij.openapi.vcs.history.VcsFileRevision;
 import com.intellij.openapi.vcs.history.VcsHistoryProvider;
 import com.intellij.openapi.vcs.history.VcsHistorySession;
+import com.intellij.openapi.vcs.history.VcsRevisionNumber;
 import com.intellij.openapi.vcs.ui.ReplaceFileConfirmationDialog;
 import com.intellij.openapi.vcs.vfs.VcsFileSystem;
 import com.intellij.openapi.vcs.vfs.VcsVirtualFile;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.components.JBList;
+import com.intellij.ui.components.JBScrollPane;
 import info.clearthought.layout.TableLayout;
+import org.jetbrains.annotations.Nullable;
+import org.jgraph.JGraph;
+import org.jgraph.event.GraphSelectionEvent;
+import org.jgraph.event.GraphSelectionListener;
+import org.jgraph.graph.CellView;
+import org.jgraph.graph.DefaultEdge;
+import org.jgraph.graph.DefaultGraphCell;
+import org.jgraph.graph.DefaultGraphModel;
+import org.jgraph.graph.DefaultPort;
+import org.jgraph.graph.Edge;
+import org.jgraph.graph.GraphCell;
+import org.jgraph.graph.GraphConstants;
+import org.jgraph.graph.GraphLayoutCache;
+
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionListener {
   public static final int CELL_SPACING = 15;
@@ -192,7 +192,7 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
   {
     _g.addGraphSelectionListener(this);
     _g.addMouseListener(new PopupListener());
-    JScrollPane sp = new JScrollPane(_g);
+    JBScrollPane sp = new JBScrollPane(_g);
     return(sp);
   }
 
@@ -286,27 +286,24 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
     innerPanel.add(new JLabel("Date:"),"0,2,r,f");
     _revisionTF = new JTextField();
     _revisionTF.setEditable(false);
-    _revisionTF.setBorder(BorderFactory.createLineBorder(Color.black,1));
     innerPanel.add(_revisionTF,"1,0");
     _authorTF = new JTextField();
     _authorTF.setEditable(false);
-    _authorTF.setBorder(BorderFactory.createLineBorder(Color.black,1));
     innerPanel.add(_authorTF,"1,1");
     _dateTF = new JTextField();
     _dateTF.setEditable(false);
-    _dateTF.setBorder(BorderFactory.createLineBorder(Color.black,1));
     innerPanel.add(_dateTF,"1,2");
     retVal.add(innerPanel,"0,0");
     retVal.add(new JLabel("Message:"),"1,0,f,t");
     _messageTA = new JTextArea();
     _messageTA.setEditable(false);
-    JScrollPane sp = new JScrollPane(_messageTA);
+    JBScrollPane sp = new JBScrollPane(_messageTA);
     retVal.add(sp,"2,0");
     retVal.add(new JLabel("Tags:"),"3,0,f,t");
     _tagsLM = new DefaultListModel();
-    JList tagsL = new JList(_tagsLM);
+    JBList tagsL = new JBList(_tagsLM);
     tagsL.setVisibleRowCount(4);
-    sp = new JScrollPane(tagsL);
+    sp = new JBScrollPane(tagsL);
     retVal.add(sp,"4,0");
     JComponent buttonPanel = super.createSouthPanel();
     retVal.add(buttonPanel,"5,0,r,b");
@@ -351,7 +348,7 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
       int index = message.indexOf("Revision: ");
       //Add length of Revision:
       index += 10;
-      StringBuffer revision = new StringBuffer();
+      StringBuilder revision = new StringBuilder();
       char ch = message.charAt(index);
       while((Character.isDigit(ch)) || (ch == '.')) {
         revision.append(ch);
@@ -836,7 +833,7 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
     }
     if(selRevLabels == null)
       selRevLabels = new ArrayList<String>();
-    String selRevLabelChoices[] = selRevLabels.toArray(new String[0]);
+    String selRevLabelChoices[] = selRevLabels.toArray(new String[selRevLabels.size()]);
     Arrays.sort(selRevLabelChoices);
     if(selRevLabelChoices.length == 0) {
       Messages.showMessageDialog(_project,"There are no tags on this revision to remove","Invalid Revision",Messages.getErrorIcon());

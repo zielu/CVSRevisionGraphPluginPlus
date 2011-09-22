@@ -15,10 +15,10 @@
 
 package org.cvstoolbox.graph;
 
+import com.intellij.openapi.vcs.history.VcsFileRevision;
+
 import java.util.Comparator;
 import java.util.Date;
-
-import com.intellij.openapi.vcs.history.VcsFileRevision;
 
 public class VcsFileRevisionDateComparator implements Comparator<VcsFileRevision> {
   public int compare(VcsFileRevision r1,VcsFileRevision r2)

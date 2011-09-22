@@ -26,7 +26,6 @@ import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.actions.VcsContextFactory;
 import com.intellij.openapi.vcs.history.VcsHistoryProvider;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.peer.PeerFactory;
 
 public class CVSRevisionGraphAction extends AnAction {
   public void actionPerformed(AnActionEvent ae)
@@ -39,8 +38,7 @@ public class CVSRevisionGraphAction extends AnAction {
       ProjectLevelVcsManager vcsManager = ProjectLevelVcsManager.getInstance(project);
       AbstractVcs vcs = vcsManager.getVcsFor(file);
       VcsHistoryProvider histProvider = vcs.getVcsHistoryProvider();
-      PeerFactory peerFactory = PeerFactory.getInstance();
-      VcsContextFactory vcsContext = peerFactory.getVcsContextFactory();
+      VcsContextFactory vcsContext = VcsContextFactory.SERVICE.getInstance();
       FilePath filePath = vcsContext.createFilePathOn(file);
       CVSRevisionGraph dialog = new CVSRevisionGraph(project,filePath,histProvider);
       dialog.pack();

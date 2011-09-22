@@ -15,33 +15,33 @@
 
 package org.cvstoolbox.graph;
 
-import java.io.IOException;
-
-import org.netbeans.lib.cvsclient.command.Command;
+import com.intellij.cvsSupport2.connections.CvsRootProvider;
+import com.intellij.cvsSupport2.cvsoperations.common.CvsExecutionEnvironment;
+import com.intellij.cvsSupport2.cvsoperations.common.CvsOperationOnFiles;
+import com.intellij.openapi.vcs.FilePath;
+import com.intellij.openapi.vfs.VirtualFile;
+import org.netbeans.lib.cvsclient.IClientEnvironment;
+import org.netbeans.lib.cvsclient.IRequestProcessor;
 import org.netbeans.lib.cvsclient.command.AbstractCommand;
+import org.netbeans.lib.cvsclient.command.Command;
 import org.netbeans.lib.cvsclient.command.CommandException;
+import org.netbeans.lib.cvsclient.command.DefaultEntryParser;
 import org.netbeans.lib.cvsclient.command.ICvsFiles;
 import org.netbeans.lib.cvsclient.command.IOCommandException;
-import org.netbeans.lib.cvsclient.command.DefaultEntryParser;
-import org.netbeans.lib.cvsclient.IRequestProcessor;
-import org.netbeans.lib.cvsclient.IClientEnvironment;
 import org.netbeans.lib.cvsclient.connection.AuthenticationException;
-import org.netbeans.lib.cvsclient.request.Requests;
-import org.netbeans.lib.cvsclient.request.CommandRequest;
+import org.netbeans.lib.cvsclient.event.DualListener;
+import org.netbeans.lib.cvsclient.event.ICvsListener;
+import org.netbeans.lib.cvsclient.event.ICvsListenerRegistry;
+import org.netbeans.lib.cvsclient.event.IEventSender;
 import org.netbeans.lib.cvsclient.progress.IProgressViewer;
 import org.netbeans.lib.cvsclient.progress.RangeProgressViewer;
 import org.netbeans.lib.cvsclient.progress.receiving.FileInfoAndMessageResponseProgressHandler;
-import org.netbeans.lib.cvsclient.progress.sending.IRequestsProgressHandler;
 import org.netbeans.lib.cvsclient.progress.sending.FileStateRequestsProgressHandler;
-import org.netbeans.lib.cvsclient.event.IEventSender;
-import org.netbeans.lib.cvsclient.event.ICvsListenerRegistry;
-import org.netbeans.lib.cvsclient.event.ICvsListener;
-import org.netbeans.lib.cvsclient.event.DualListener;
-import com.intellij.cvsSupport2.cvsoperations.common.CvsOperationOnFiles;
-import com.intellij.cvsSupport2.cvsoperations.common.CvsExecutionEnvironment;
-import com.intellij.cvsSupport2.connections.CvsRootProvider;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vcs.FilePath;
+import org.netbeans.lib.cvsclient.progress.sending.IRequestsProgressHandler;
+import org.netbeans.lib.cvsclient.request.CommandRequest;
+import org.netbeans.lib.cvsclient.request.Requests;
+
+import java.io.IOException;
 
 public class ExtendedTagOperation extends CvsOperationOnFiles {
   protected String _tag;
@@ -51,10 +51,9 @@ public class ExtendedTagOperation extends CvsOperationOnFiles {
 
   public ExtendedTagOperation(VirtualFile files[],String tag,boolean removeTag,boolean overrideExisting,String tagByRevision)
   {
-    VirtualFile arr[] = files;
-    int len = arr.length;
-    for(int i = 0; i < len; i++) {
-      VirtualFile file = arr[i];
+
+    for(int i = 0; i < files.length; i++) {
+      VirtualFile file = files[i];
       addFile(file);
     }
     _removeTag = removeTag;
@@ -65,10 +64,9 @@ public class ExtendedTagOperation extends CvsOperationOnFiles {
 
   public ExtendedTagOperation(FilePath files[],String tag,boolean removeTag,boolean overrideExisting,String tagByRevision)
   {
-    FilePath arr[] = files;
-    int len = arr.length;
-    for(int i = 0; i < len; i++) {
-      FilePath file = arr[i];
+
+    for(int i = 0; i < files.length; i++) {
+      FilePath file = files[i];
       addFile(file.getIOFile());
     }
     _removeTag = removeTag;
@@ -245,7 +243,7 @@ class MyTagCommand extends AbstractCommand {
 
   protected String getCvsArguments()
   {
-    StringBuffer arguments = new StringBuffer();
+    StringBuilder arguments = new StringBuilder();
     if(!isRecursive())
       arguments.append("-l ");
     if(isDeleteTag())
