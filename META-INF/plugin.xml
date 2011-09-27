@@ -28,13 +28,16 @@
       <p>Uses <a href="http://p.yusukekamiyamane.com/">Fugue Icons</a></p>
   ]]>
   </description>
-  <version>2.32</version>
+  <version>2.40</version>
   <vendor logo="/org/cvstoolbox/graph/images/graph_24.png" email="cvstoolbox@gmail.com">Łukasz Zieliński</vendor>
   <category>VCS Integration</category>
   <depends>CVS</depends>
   <project-components>
     <component>
       <implementation-class>org.cvstoolbox.graph.CVSRevisionGraphProjectComponent</implementation-class>
+    </component>
+    <component>
+        <implementation-class>org.cvstoolbox.graph.CVSRevisionGraphProjectConfig</implementation-class>
     </component>
   </project-components>
   <actions>
@@ -47,12 +50,14 @@
   <change-notes>
     <![CDATA[
     <ul>
-      <li>2.32
+      <li>2.40
         <ol>
-          <li>GUI adjustments.</li>
-          <li>Icons refresh.</li>
+          <li>Migrated to Idea 10 config API.</li>
+          <li>Workaround for Idea branch reporting bug.</li>
           <li>'Compare Revisions' shortcut (Ctrl+D).</li>
           <li>'Refresh Graph' shortcut (Ctrl+R).</li>
+          <li>GUI adjustments.</li>
+          <li>Icons refresh.</li>
           <li>Code cleanup.</li>
         </ol>
       </li>

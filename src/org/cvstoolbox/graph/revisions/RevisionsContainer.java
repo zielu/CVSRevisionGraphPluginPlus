@@ -28,9 +28,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class RevisionsContainer {
     private final RevisionStringComparator _revCompare;
@@ -116,24 +120,32 @@ public class RevisionsContainer {
     public void convertToRevisionMap(List<VcsFileRevision> revisions) {
         _revMap.clear();
         HashMap<String, List<VcsFileRevision>> revMap = new HashMap<String, List<VcsFileRevision>>();
-        List<String> branchRevisionList = new ArrayList<String>();
-        HashMap<String, String> branchNameMap = new HashMap<String, String>();
-        branchNameMap.put("1", "HEAD");
+        Set<String> branchRevisions = new LinkedHashSet<String>(revisions.size());
+        Set<String> tags = new HashSet<String>();
+        HashMap<String, List<String>> branchNameMap = new HashMap<String, List<String>>();
+        //branch revision -> names
+        branchNameMap.put("1", Collections.singletonList("HEAD"));
         for (VcsFileRevision rev : revisions) {
             String branchRevision = getParentRevision(rev.getRevisionNumber().asString());
-            if (!branchRevisionList.contains(branchRevision)) {
-                branchRevisionList.add(branchRevision);
-            }
+            branchRevisions.add(branchRevision);
             if (rev instanceof CvsFileRevision) {
                 CvsFileRevision cvsRev = (CvsFileRevision) rev;
                 Collection<String> branches = cvsRev.getBranches();
                 for (String branch : branches) {
                     String branchParts[] = branch.split(" *[()]");
-                    branchNameMap.put(branchParts[1], branchParts[0]);
-                    if (!branchRevisionList.contains(branchParts[1])) {
-                        branchRevisionList.add(branchParts[1]);
+
+                    String revision = branchParts[1];
+                    String name = branchParts[0];
+
+                    List<String> names = branchNameMap.get(revision);
+                    if (names == null) {
+                        names = new LinkedList<String>();
+                        branchNameMap.put(revision, names);
                     }
+                    names.add(name);
+                    branchRevisions.add(revision);
                 }
+                tags.addAll(cvsRev.getTags());
             }
             List<VcsFileRevision> revsOnBranch = revMap.get(branchRevision);
             if (revsOnBranch == null) {
@@ -171,17 +183,27 @@ public class RevisionsContainer {
                 revsOnBranch.add(rev);
             }
         }
+        for (Collection<String> branchNames : branchNameMap.values()) {
+            branchNames.removeAll(tags);
+        }
+
         //Sort everything
-        Collections.sort(branchRevisionList, _revCompare);
+        List<String> branchRevisionsList = new ArrayList<String>(branchRevisions);
+        branchRevisions.removeAll(tags);
+        Collections.sort(branchRevisionsList, _revCompare);
         for (List<VcsFileRevision> revsOnBranch : revMap.values()) {
             Collections.sort(revsOnBranch, _revCompare);
         }
         //Fill up return value in correct order
-        for (String branchRevision : branchRevisionList) {
-            String branchName = branchNameMap.get(branchRevision);
-            if (branchName == null) {
+        for (String branchRevision : branchRevisionsList) {
+            List<String> branchNames = branchNameMap.get(branchRevision);
+            String branchName;
+            if (branchNames == null) {
                 branchName = "<unnamed>";
+            } else if (branchNames.isEmpty()) {
+                continue;
             }
+            branchName = branchNames.get(0);
             if (!_branchFilter.isEmpty()) {
                 boolean contains = _branchFilter.contains(branchName);
                 if (_showBranchFilter ? !contains : contains) {
@@ -199,5 +221,17 @@ public class RevisionsContainer {
 
     public void dispose() {
         _revMap.clear();
+    }
+
+    public String getStringRepresentation() {
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<BranchRevision, List<VcsFileRevision>> branch : _revMap.entrySet()) {
+            result.append("\n").append(branch.getKey().getRevision()).append("-").append(branch.getKey().getName());
+            for (VcsFileRevision rev : branch.getValue()) {
+                result.append("\n  ").append(rev.getRevisionNumber().asString());
+            }
+        }
+
+        return result.toString();
     }
 }

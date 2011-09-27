@@ -167,9 +167,10 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
         _g = new JGraph(_gm);
         _cellViewFactory = new CVSRevisionGraphCellViewFactory(_project);
         CVSRevisionGraphProjectComponent rgpc = _project.getComponent(CVSRevisionGraphProjectComponent.class);
-        _cellViewFactory.setShowTags(rgpc.is_showTags());
-        _cellViewFactory.setShowTagFilter(rgpc.is_showTagFilter());
-        _cellViewFactory.setTagFilter(rgpc.get_tagFilter());
+        CVSRevisionGraphProjectConfig config = rgpc.getConfig();
+        _cellViewFactory.setShowTags(config.is_showTags());
+        _cellViewFactory.setShowTagFilter(config.is_showTagFilter());
+        _cellViewFactory.setTagFilter(config.get_tagFilter());
         _g.getGraphLayoutCache().setFactory(_cellViewFactory);
         _g.setHandleSize(0);
         _g.setMoveable(false);
@@ -182,16 +183,16 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
             throw new RuntimeException(t.getMessage());
         }
         _revisions = historySession.getRevisionList();
-        _showBranchFilter = rgpc.is_showBranchFilter();
+        _showBranchFilter = config.is_showBranchFilter();
         _branchFilter = rgpc.getBranchFilter();
         if (_branchFilter.isEmpty()) {
             _showBranchFilter = false;
         }
-        _showRevisionFilter = rgpc.is_showRevisionFilter();
-        _afterDateTimeFilter = rgpc.is_afterDateTimeFilter();
-        _beforeDateTimeFilter = rgpc.is_beforeDateTimeFilter();
-        _afterDateTime = rgpc.get_afterDateTime();
-        _beforeDateTime = rgpc.get_beforeDateTime();
+        _showRevisionFilter = config.is_showRevisionFilter();
+        _afterDateTimeFilter = config.is_afterDateTimeFilter();
+        _beforeDateTimeFilter = config.is_beforeDateTimeFilter();
+        _afterDateTime = config.get_afterDateTime();
+        _beforeDateTime = config.get_beforeDateTime();
         createGraph();
         layoutGraph();
         setCancelButtonText("Close");
@@ -811,7 +812,7 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
             String beforeTagName = rgpc.getBeforeTagName(options._sourceBranchName, options._destBranchName);
             addTag(beforeTagName);
         }
-        if ((options._moveAfter) && rgpc.is_useTwoTagConvention()) {
+        if ((options._moveAfter) && rgpc.getConfig().is_useTwoTagConvention()) {
             String afterTagName = rgpc.getAfterTagName(options._sourceBranchName, options._destBranchName);
             addTag(afterTagName);
         }

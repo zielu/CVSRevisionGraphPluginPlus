@@ -92,11 +92,11 @@ public class CVSMoveMergeTagsOptions extends DialogWrapper implements ActionList
     retVal.add(swapButton,"2,0,2,1,c,c");
     //Check for single or dual tag mode
     CVSRevisionGraphProjectComponent rgpc = _project.getComponent(CVSRevisionGraphProjectComponent.class);
-    _moveBeforeCB = new JCheckBox(rgpc.is_useTwoTagConvention() ? MOVE_BEFORE_PREFIX : MOVE_PREFIX,true);
+    _moveBeforeCB = new JCheckBox(rgpc.getConfig().is_useTwoTagConvention() ? MOVE_BEFORE_PREFIX : MOVE_PREFIX,true);
     retVal.add(_moveBeforeCB,"0,2,2,2");
     _moveAfterCB = new JCheckBox(MOVE_AFTER_PREFIX,true);
     retVal.add(_moveAfterCB,"0,3,2,3");
-    _moveAfterCB.setVisible(rgpc.is_useTwoTagConvention());
+    _moveAfterCB.setVisible(rgpc.getConfig().is_useTwoTagConvention());
     return(retVal);
   }
 
@@ -158,12 +158,12 @@ public class CVSMoveMergeTagsOptions extends DialogWrapper implements ActionList
     String sourceBranchName = (String)_sourceBranchNameCB.getSelectedItem();
     String destBranchName = (String)_destBranchNameCB.getSelectedItem();
     if((sourceBranchName == null) || (destBranchName == null)) {
-      _moveBeforeCB.setText(rgpc.is_useTwoTagConvention() ? MOVE_BEFORE_PREFIX : MOVE_PREFIX);
+      _moveBeforeCB.setText(rgpc.getConfig().is_useTwoTagConvention() ? MOVE_BEFORE_PREFIX : MOVE_PREFIX);
       _moveAfterCB.setText(MOVE_AFTER_PREFIX);
     } else {
       String beforeTagName = rgpc.getBeforeTagName(sourceBranchName,destBranchName);
       String afterTagName = rgpc.getAfterTagName(sourceBranchName,destBranchName);
-      if(rgpc.is_useTwoTagConvention())
+      if(rgpc.getConfig().is_useTwoTagConvention())
         _moveBeforeCB.setText(MOVE_BEFORE_PREFIX + " (" + beforeTagName + ")");
       else
         _moveBeforeCB.setText(MOVE_PREFIX + " (" + beforeTagName + ")");

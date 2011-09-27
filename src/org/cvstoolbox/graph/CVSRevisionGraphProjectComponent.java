@@ -19,12 +19,7 @@ import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.IconLoader;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.JDOMExternalizable;
-import com.intellij.openapi.util.WriteExternalException;
-import org.jdom.Element;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -33,285 +28,124 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class CVSRevisionGraphProjectComponent implements ProjectComponent,Configurable,JDOMExternalizable {
-  public static final boolean DEFAULT_USE_TWO_TAG_CONVENTION = true;
-  public static final boolean DEFAULT_SHOW_TAGS = true;
-  public static final boolean DEFAULT_SHOW_TAG_FILTER = false;
-  public static final boolean DEFAULT_SHOW_BRANCH_FILTER = false;
-  public static final boolean DEFAULT_SHOW_REVISION_FILTER = false;
-  public static final boolean DEFAULT_AFTER_DATE_TIME_FILTER = false;
-  public static final boolean DEFAULT_BEFORE_DATE_TIME_FILTER = false;
-  public static final String DEFAULT_AFTER_DATE_TIME = "";
-  public static final String DEFAULT_BEFORE_DATE_TIME = "";
-  public static final String DEFAULT_TAG_FILTER = "";
-  public static final String DEFAULT_BRANCH_FILTER = null;
-  public static final String DEFAULT_TWO_TAG_NAMING = "TAG_$T_MERGE_$S_TO_$D";
-  public static final String DEFAULT_ONE_TAG_NAMING = "TAG_MERGE_$S_TO_$D";
 
-  protected CVSRevisionGraphConfiguration _form = null;
-  public boolean _useTwoTagConvention = DEFAULT_USE_TWO_TAG_CONVENTION;
-  public boolean _showTags = DEFAULT_SHOW_TAGS;
-  public String _tagNaming = DEFAULT_TWO_TAG_NAMING;
-  public String _tagFilter = DEFAULT_TAG_FILTER;
-  public String _branchFilter = DEFAULT_BRANCH_FILTER;
-  public boolean _showRevisionFilter = DEFAULT_SHOW_REVISION_FILTER;
-  public boolean _afterDateTimeFilter = DEFAULT_AFTER_DATE_TIME_FILTER;
-  public boolean _beforeDateTimeFilter = DEFAULT_BEFORE_DATE_TIME_FILTER;
-  public String _afterDateTime = DEFAULT_AFTER_DATE_TIME;
-  public String _beforeDateTime = DEFAULT_BEFORE_DATE_TIME;
-  public boolean _showTagFilter = DEFAULT_SHOW_TAG_FILTER;
-  public boolean _showBranchFilter = DEFAULT_SHOW_BRANCH_FILTER;
+public class CVSRevisionGraphProjectComponent implements ProjectComponent, Configurable {
 
-  protected Icon _graphIcon = IconLoader.getIcon("/org/cvstoolbox/graph/images/graph_24.png");
+    private CVSRevisionGraphProjectConfig config;
+    protected CVSRevisionGraphConfiguration _form = null;
+    protected Icon _graphIcon = IconLoader.getIcon("/org/cvstoolbox/graph/images/graph_24.png");
 
-  public CVSRevisionGraphProjectComponent(Project project)
-  {
-  }
-
-  public String getBeforeTagName(String sourceBranchName,String destBranchName)
-  {
-    String retVal = _tagNaming.replace("$T","BEFORE");
-    retVal = retVal.replace("$S",sourceBranchName);
-    retVal = retVal.replace("$D",destBranchName);
-    return(retVal);
-  }
-
-  public String getAfterTagName(String sourceBranchName,String destBranchName)
-  {
-    String retVal = _tagNaming.replace("$T","AFTER");
-    retVal = retVal.replace("$S",sourceBranchName);
-    retVal = retVal.replace("$D",destBranchName);
-    return(retVal);
-  }
-
-  public void initComponent()
-  {
-  }
-
-  public void disposeComponent()
-  {
-  }
-
-  @NotNull
-  public String getComponentName()
-  {
-    return("CVSRevisionGraphProjectComponent");
-  }
-
-  public void projectOpened()
-  {
-  }
-
-  public void projectClosed()
-  {
-  }
-
-  public boolean is_useTwoTagConvention()
-  {
-    return _useTwoTagConvention;
-  }
-
-  public void set_useTwoTagConvention(final boolean useTwoTagConvention)
-  {
-    _useTwoTagConvention = useTwoTagConvention;
-  }
-
-  public boolean is_showTags()
-  {
-    return _showTags;
-  }
-
-  public void set_showTags(final boolean showTags)
-  {
-    _showTags = showTags;
-  }
-
-  public String get_tagFilter()
-  {
-    return _tagFilter;
-  }
-
-  public void set_tagFilter(final String tagFilter)
-  {
-    _tagFilter = tagFilter;
-  }
-
-  public List<String> getBranchFilter()
-  {
-    List<String> retVal = new ArrayList<String>();
-    if(_branchFilter == null)
-      return(retVal);
-    String bFilters[] = _branchFilter.split(",");
-    for(String bFilter : bFilters)
-      retVal.add(bFilter);
-    return(retVal);
-  }
-
-  public void setBranchFilter(List<String> branchFilter)
-  {
-    if((branchFilter == null) || (branchFilter.size() == 0)) {
-      _branchFilter = null;
-      return;
+    public CVSRevisionGraphProjectComponent(Project project) {
+        config = project.getComponent(CVSRevisionGraphProjectConfig.class);
     }
-    StringBuffer bFilters = new StringBuffer();
-    for(String bFilter : branchFilter) {
-      if(bFilters.length() != 0)
-        bFilters.append(",");
-      bFilters.append(bFilter);
+
+    public String getBeforeTagName(String sourceBranchName, String destBranchName) {
+        String retVal = config.get_tagNaming().replace("$T", "BEFORE");
+        retVal = retVal.replace("$S", sourceBranchName);
+        retVal = retVal.replace("$D", destBranchName);
+        return (retVal);
     }
-    _branchFilter = bFilters.toString();
-  }
 
-  public String get_branchFilter()
-  {
-    return _branchFilter;
-  }
+    public String getAfterTagName(String sourceBranchName, String destBranchName) {
+        String retVal = config.get_tagNaming().replace("$T", "AFTER");
+        retVal = retVal.replace("$S", sourceBranchName);
+        retVal = retVal.replace("$D", destBranchName);
+        return (retVal);
+    }
 
-  public void set_branchFilter(String branchFilter)
-  {
-    _branchFilter = branchFilter;
-  }
+    public void initComponent() {
+    }
 
-  public boolean is_showTagFilter()
-  {
-    return _showTagFilter;
-  }
+    public void disposeComponent() {
+    }
 
-  public void set_showTagFilter(boolean showTagFilter)
-  {
-    _showTagFilter = showTagFilter;
-  }
+    @NotNull
+    public String getComponentName() {
+        return ("CVSRevisionGraphProjectComponent");
+    }
 
-  public boolean is_showBranchFilter()
-  {
-    return _showBranchFilter;
-  }
+    public void projectOpened() {
+    }
 
-  public void set_showBranchFilter(boolean showBranchFilter)
-  {
-    _showBranchFilter = showBranchFilter;
-  }
+    public void projectClosed() {
+    }
 
-  public String get_tagNaming()
-  {
-    return _tagNaming;
-  }
+    public CVSRevisionGraphProjectConfig getConfig() {
+        return config;
+    }
 
-  public void set_tagNaming(final String tagNaming)
-  {
-    _tagNaming = tagNaming;
-  }
+    public List<String> getBranchFilter() {
+        List<String> retVal = new ArrayList<String>();
+        if (config.get_branchFilter() == null) {
+            return (retVal);
+        }
+        String bFilters[] = config.get_branchFilter().split(",");
+        Collections.addAll(retVal, bFilters);
+        return (retVal);
+    }
 
-  public String get_afterDateTime()
-  {
-    return _afterDateTime;
-  }
+    public void setBranchFilter(List<String> branchFilter) {
+        if ((branchFilter == null) || (branchFilter.size() == 0)) {
+            config.set_branchFilter(null);
+            return;
+        }
+        StringBuilder bFilters = new StringBuilder();
+        for (String bFilter : branchFilter) {
+            if (bFilters.length() != 0) {
+                bFilters.append(",");
+            }
+            bFilters.append(bFilter);
+        }
+        config.set_branchFilter(bFilters.toString());
+    }
 
-  public void set_afterDateTime(String afterDateTime)
-  {
-    _afterDateTime = afterDateTime;
-  }
+    @Nls
+    public String getDisplayName() {
+        return ("CVS Revision Graph");
+    }
 
-  public boolean is_afterDateTimeFilter()
-  {
-    return _afterDateTimeFilter;
-  }
+    public Icon getIcon() {
+        return (_graphIcon);
+    }
 
-  public void set_afterDateTimeFilter(boolean afterDateTimeFilter)
-  {
-    _afterDateTimeFilter = afterDateTimeFilter;
-  }
+    @Nullable
+    @NonNls
+    public String getHelpTopic() {
+        return ("doc-cvsRG");
+    }
 
-  public String get_beforeDateTime()
-  {
-    return _beforeDateTime;
-  }
+    public JComponent createComponent() {
+        if (_form == null) {
+            _form = new CVSRevisionGraphConfiguration();
+        }
+        return (_form.get_mainPanel());
+    }
 
-  public void set_beforeDateTime(String beforeDateTime)
-  {
-    _beforeDateTime = beforeDateTime;
-  }
+    public boolean isModified() {
+        if (_form == null) {
+            return (false);
+        }
+        return (_form.isModified(this));
+    }
 
-  public boolean is_beforeDateTimeFilter()
-  {
-    return _beforeDateTimeFilter;
-  }
+    public void apply() throws ConfigurationException {
+        if (_form == null) {
+            return;
+        }
+        _form.getData(this);
+    }
 
-  public void set_beforeDateTimeFilter(boolean beforeDateTimeFilter)
-  {
-    _beforeDateTimeFilter = beforeDateTimeFilter;
-  }
+    public void reset() {
+        if (_form == null) {
+            return;
+        }
+        _form.setData(this);
+    }
 
-  public boolean is_showRevisionFilter()
-  {
-    return _showRevisionFilter;
-  }
-
-  public void set_showRevisionFilter(boolean showRevisionFilter)
-  {
-    _showRevisionFilter = showRevisionFilter;
-  }
-
-  @Nls
-  public String getDisplayName()
-  {
-    return("CVS Revision Graph");
-  }
-
-  public Icon getIcon()
-  {
-    return(_graphIcon);
-  }
-
-  @Nullable
-  @NonNls
-  public String getHelpTopic()
-  {
-    return("doc-cvsRG");
-  }
-
-  public JComponent createComponent()
-  {
-    if(_form == null)
-      _form = new CVSRevisionGraphConfiguration();
-    return(_form.get_mainPanel());
-  }
-
-  public boolean isModified()
-  {
-    if(_form == null)
-      return(false);
-    return(_form.isModified(this));
-  }
-
-  public void apply() throws ConfigurationException
-  {
-    if(_form == null)
-      return;
-    _form.getData(this);
-  }
-
-  public void reset()
-  {
-    if(_form == null)
-      return;
-    _form.setData(this);
-  }
-
-  public void disposeUIResources()
-  {
-    _form = null;
-  }
-
-  public void readExternal(Element element) throws InvalidDataException
-  {
-    DefaultJDOMExternalizer.readExternal(this, element);
-  }
-
-  public void writeExternal(Element element) throws WriteExternalException
-  {
-    DefaultJDOMExternalizer.writeExternal(this, element);
-  }
+    public void disposeUIResources() {
+        _form = null;
+    }
 }

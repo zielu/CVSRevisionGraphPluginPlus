@@ -142,17 +142,17 @@ public class CVSRevisionGraphConfiguration {
 
     protected void updateTagNamingExample() {
         if (_useTwoTagConventionCB.isSelected()) {
-            _tagNamingExampleL.setText("Example:  " + CVSRevisionGraphProjectComponent.DEFAULT_TWO_TAG_NAMING);
+            _tagNamingExampleL.setText("Example:  " + CVSRevisionGraphProjectConfig.DEFAULT_TWO_TAG_NAMING);
         } else {
-            _tagNamingExampleL.setText("Example:  " + CVSRevisionGraphProjectComponent.DEFAULT_ONE_TAG_NAMING);
+            _tagNamingExampleL.setText("Example:  " + CVSRevisionGraphProjectConfig.DEFAULT_ONE_TAG_NAMING);
         }
     }
 
     protected void updateTagNamingDefault() {
         if (_useTwoTagConventionCB.isSelected()) {
-            _tagNamingTF.setText(CVSRevisionGraphProjectComponent.DEFAULT_TWO_TAG_NAMING);
+            _tagNamingTF.setText(CVSRevisionGraphProjectConfig.DEFAULT_TWO_TAG_NAMING);
         } else {
-            _tagNamingTF.setText(CVSRevisionGraphProjectComponent.DEFAULT_ONE_TAG_NAMING);
+            _tagNamingTF.setText(CVSRevisionGraphProjectConfig.DEFAULT_ONE_TAG_NAMING);
         }
     }
 
@@ -178,16 +178,17 @@ public class CVSRevisionGraphConfiguration {
     }
 
     public void setData(CVSRevisionGraphProjectComponent data) {
-        _useTwoTagConventionCB.setSelected(data.is_useTwoTagConvention());
-        _tagNamingTF.setText(data.get_tagNaming());
-        _showTagsCB.setSelected(data.is_showTags());
-        if (data.is_showTagFilter()) {
+        CVSRevisionGraphProjectConfig config = data.getConfig();
+        _useTwoTagConventionCB.setSelected(config.is_useTwoTagConvention());
+        _tagNamingTF.setText(config.get_tagNaming());
+        _showTagsCB.setSelected(config.is_showTags());
+        if (config.is_showTagFilter()) {
             _showTagR.setSelected(true);
         } else {
             _hideTagR.setSelected(true);
         }
-        _tagFilterTF.setText(data.get_tagFilter());
-        if (data.is_showBranchFilter()) {
+        _tagFilterTF.setText(config.get_tagFilter());
+        if (config.is_showBranchFilter()) {
             _showBranchR.setSelected(true);
         } else {
             _hideBranchR.setSelected(true);
@@ -198,15 +199,15 @@ public class CVSRevisionGraphConfiguration {
         for (String hiddenBranch : hiddenBranches) {
             lm.addElement(hiddenBranch);
         }
-        if (data.is_showRevisionFilter()) {
+        if (config.is_showRevisionFilter()) {
             _showRevisionR.setSelected(true);
         } else {
             _hideRevisionR.setSelected(true);
         }
-        _afterDateTimeCB.setSelected(data.is_afterDateTimeFilter());
-        _beforeDateTimeCB.setSelected(data.is_beforeDateTimeFilter());
-        _afterDateTimeTF.setText(data.get_afterDateTime());
-        _beforeDateTimeTF.setText(data.get_beforeDateTime());
+        _afterDateTimeCB.setSelected(config.is_afterDateTimeFilter());
+        _beforeDateTimeCB.setSelected(config.is_beforeDateTimeFilter());
+        _afterDateTimeTF.setText(config.get_afterDateTime());
+        _beforeDateTimeTF.setText(config.get_beforeDateTime());
         updateTagNamingExample();
         updateTagFilter();
         updateAfterDateTimeFilter();
@@ -214,12 +215,13 @@ public class CVSRevisionGraphConfiguration {
     }
 
     public void getData(CVSRevisionGraphProjectComponent data) {
-        data.set_useTwoTagConvention(_useTwoTagConventionCB.isSelected());
-        data.set_tagNaming(_tagNamingTF.getText());
-        data.set_showTags(_showTagsCB.isSelected());
-        data.set_showTagFilter(_showTagR.isSelected());
-        data.set_tagFilter(_tagFilterTF.getText());
-        data.set_showBranchFilter(_showBranchR.isSelected());
+        CVSRevisionGraphProjectConfig config = data.getConfig();
+        config.set_useTwoTagConvention(_useTwoTagConventionCB.isSelected());
+        config.set_tagNaming(_tagNamingTF.getText());
+        config.set_showTags(_showTagsCB.isSelected());
+        config.set_showTagFilter(_showTagR.isSelected());
+        config.set_tagFilter(_tagFilterTF.getText());
+        config.set_showBranchFilter(_showBranchR.isSelected());
         List<String> hiddenBranches = new ArrayList<String>();
         DefaultListModel lm = (DefaultListModel) _branchFilterL.getModel();
         for (int i = 0; i < lm.getSize(); i++) {
@@ -227,45 +229,46 @@ public class CVSRevisionGraphConfiguration {
             hiddenBranches.add(hiddenBranch);
         }
         data.setBranchFilter(hiddenBranches);
-        data.set_showRevisionFilter(_showRevisionR.isSelected());
-        data.set_afterDateTimeFilter(_afterDateTimeCB.isSelected());
-        data.set_beforeDateTimeFilter(_beforeDateTimeCB.isSelected());
-        data.set_afterDateTime(_afterDateTimeTF.getText());
-        data.set_beforeDateTime(_beforeDateTimeTF.getText());
+        config.set_showRevisionFilter(_showRevisionR.isSelected());
+        config.set_afterDateTimeFilter(_afterDateTimeCB.isSelected());
+        config.set_beforeDateTimeFilter(_beforeDateTimeCB.isSelected());
+        config.set_afterDateTime(_afterDateTimeTF.getText());
+        config.set_beforeDateTime(_beforeDateTimeTF.getText());
     }
 
     public boolean isModified(CVSRevisionGraphProjectComponent data) {
-        if (_useTwoTagConventionCB.isSelected() != data.is_useTwoTagConvention()) {
+        CVSRevisionGraphProjectConfig config = data.getConfig();
+        if (_useTwoTagConventionCB.isSelected() != config.is_useTwoTagConvention()) {
             return true;
         }
-        if (_tagNamingTF.getText() != null ? !_tagNamingTF.getText().equals(data.get_tagNaming()) : data.get_tagNaming() != null) {
+        if (_tagNamingTF.getText() != null ? !_tagNamingTF.getText().equals(config.get_tagNaming()) : config.get_tagNaming() != null) {
             return true;
         }
-        if (_showRevisionR.isSelected() != data.is_showRevisionFilter()) {
+        if (_showRevisionR.isSelected() != config.is_showRevisionFilter()) {
             return true;
         }
-        if (_afterDateTimeCB.isSelected() != data.is_afterDateTimeFilter()) {
+        if (_afterDateTimeCB.isSelected() != config.is_afterDateTimeFilter()) {
             return true;
         }
-        if (_beforeDateTimeCB.isSelected() != data.is_beforeDateTimeFilter()) {
+        if (_beforeDateTimeCB.isSelected() != config.is_beforeDateTimeFilter()) {
             return true;
         }
-        if (_afterDateTimeTF.getText() != null ? !_afterDateTimeTF.getText().equals(data.get_afterDateTime()) : data.get_afterDateTime() != null) {
+        if (_afterDateTimeTF.getText() != null ? !_afterDateTimeTF.getText().equals(config.get_afterDateTime()) : config.get_afterDateTime() != null) {
             return true;
         }
-        if (_beforeDateTimeTF.getText() != null ? !_beforeDateTimeTF.getText().equals(data.get_beforeDateTime()) : data.get_beforeDateTime() != null) {
+        if (_beforeDateTimeTF.getText() != null ? !_beforeDateTimeTF.getText().equals(config.get_beforeDateTime()) : config.get_beforeDateTime() != null) {
             return true;
         }
-        if (_showTagsCB.isSelected() != data.is_showTags()) {
+        if (_showTagsCB.isSelected() != config.is_showTags()) {
             return true;
         }
-        if (_showTagR.isSelected() != data.is_showTagFilter()) {
+        if (_showTagR.isSelected() != config.is_showTagFilter()) {
             return true;
         }
-        if (_tagFilterTF.getText() != null ? !_tagFilterTF.getText().equals(data.get_tagFilter()) : data.get_tagFilter() != null) {
+        if (_tagFilterTF.getText() != null ? !_tagFilterTF.getText().equals(config.get_tagFilter()) : config.get_tagFilter() != null) {
             return true;
         }
-        if (_showBranchR.isSelected() != data.is_showBranchFilter()) {
+        if (_showBranchR.isSelected() != config.is_showBranchFilter()) {
             return true;
         }
         DefaultListModel lm = (DefaultListModel) _branchFilterL.getModel();
