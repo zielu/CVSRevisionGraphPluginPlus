@@ -59,6 +59,7 @@
           <li>GUI adjustments.</li>
           <li>Icons refresh.</li>
           <li>Code cleanup.</li>
+          <li>Fixed <a href="https://github.com/zielu/CVSRevisionGraphPluginPlus/issues/1">issue #1</a></li>
         </ol>
       </li>
       <li>2.31

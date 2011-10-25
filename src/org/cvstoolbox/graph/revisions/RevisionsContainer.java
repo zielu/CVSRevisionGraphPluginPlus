@@ -202,8 +202,9 @@ public class RevisionsContainer {
                 branchName = "<unnamed>";
             } else if (branchNames.isEmpty()) {
                 continue;
+            } else {
+                branchName = branchNames.get(0);
             }
-            branchName = branchNames.get(0);
             if (!_branchFilter.isEmpty()) {
                 boolean contains = _branchFilter.contains(branchName);
                 if (_showBranchFilter ? !contains : contains) {
