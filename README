@@ -1,1 +1,8 @@
-This file was created by IntelliJ IDEA 10.5.2 for binding GitHub repository
+Draws a graph of all revisions of the current CVS controlled file.
+The graph can be zoomed in and out to better manage large revision graph history.
+Not all CVS servers support merge history so if you follow a convention of adding &quot;Merge From: [branchName]&quot; and &quot;Revision: [revisionNumber]&quot; in your commit message when you check in a merged file, the revision graph will draw red merge arrows showing the merge graphically.
+Right click editor and choose Revision Graph... from within the CVS menu.  Offers the ability to add and remove tags to specific revisions in the graph regardless of what is in the sandbox.  Provides simple management of merge tags based on a configurable merge tag naming convention.
+Allows retrieval of any selected revision into your current working copy.  Selecting an edge connecting two revisions will automatically perform a comparison.  The revision graph can be configured in the configuration dialog to not show tags at all or to filter in or out specified tags based on a regular expression.
+It can also be configured to filter in or out specified branches. The tag and branch filters can also be dynamically changed while viewing the revision graph.  The configuration dialog also contains a revision date filter and the graph can be dynamically filtered with dates.
+<p>Based on Shawn Castrianni's excellent plugin and modified to run with Idea 10+.</p>
+<p>Uses <a href="http://p.yusukekamiyamane.com/">Fugue Icons</a></p>
