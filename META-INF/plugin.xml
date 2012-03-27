@@ -28,7 +28,7 @@
       <p>Uses <a href="http://p.yusukekamiyamane.com/">Fugue Icons</a></p>
   ]]>
   </description>
-  <version>2.40</version>
+  <version>2.41</version>
   <vendor logo="/org/cvstoolbox/graph/images/graph_24.png" email="cvstoolbox@gmail.com">Łukasz Zieliński</vendor>
   <category>VCS Integration</category>
   <depends>CVS</depends>
@@ -45,11 +45,16 @@
       <add-to-group group-id="CvsFilePopupGroup" anchor="last"/>
     </action>
   </actions>
-  <idea-version since-build="99.5"/>
+  <idea-version since-build="114.000"/>
   <helpset file="CVSRevisionGraphPlusHelp.jar" path="/helpset.hs" />
   <change-notes>
     <![CDATA[
     <ul>
+      <li>2.41
+        <ol>
+          <li>Compatible with Idea 11.1 RC</li>
+        </ol>
+      </li>
       <li>2.40
         <ol>
           <li>Migrated to Idea 10 config API.</li>

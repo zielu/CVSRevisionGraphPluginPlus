@@ -115,7 +115,7 @@ class MyTagCommand extends AbstractCommand {
     ICvsListener listener;
     ICvsFiles cvsFiles;
     try {
-      cvsFiles = scanFileSystem(getFileObjects(),clientEnvironment);
+      cvsFiles = scanFileSystem(clientEnvironment);
     } catch(IOException ex) {
       throw new IOCommandException(ex);
     }
