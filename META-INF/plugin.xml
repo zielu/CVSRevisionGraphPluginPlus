@@ -14,7 +14,7 @@
   -->
 
 <!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
-<idea-plugin>
+<idea-plugin url="https://github.com/zielu/CVSRevisionGraphPluginPlus">
   <name>CVS Revision Graph Plus</name>
   <description>
   <![CDATA[
@@ -28,8 +28,9 @@
       <p>Uses <a href="http://p.yusukekamiyamane.com/">Fugue Icons</a></p>
   ]]>
   </description>
-  <version>2.41</version>
-  <vendor logo="/org/cvstoolbox/graph/images/graph_24.png" email="cvstoolbox@gmail.com">Łukasz Zieliński</vendor>
+  <version>2.42</version>
+  <vendor url="https://github.com/zielu/CVSRevisionGraphPluginPlus" 
+          logo="/org/cvstoolbox/graph/images/graph_24.png" email="cvstoolbox@gmail.com">Łukasz Zieliński</vendor>
   <category>VCS Integration</category>
   <depends>CVS</depends>
   <project-components>
@@ -50,6 +51,11 @@
   <change-notes>
     <![CDATA[
     <ul>
+      <li>2.42
+        <ol>
+          <li>Action enabled only for files under CVS</li>
+        </ol>
+      </li>
       <li>2.41
         <ol>
           <li>Compatible with Idea 11.1 RC</li>

@@ -15,6 +15,7 @@
 
 package org.cvstoolbox.graph;
 
+import com.intellij.cvsSupport2.CvsUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -30,6 +31,13 @@ import com.intellij.openapi.vfs.VirtualFile;
 
 public class CVSRevisionGraphAction extends AnAction {
     private final Logger LOG = Logger.getInstance("#org.cvstoolbox.graph.CVSRevisionGraphAction");
+
+    @Override
+    public void update(AnActionEvent ae) {
+        VirtualFile file = PlatformDataKeys.VIRTUAL_FILE.getData(ae.getDataContext());
+        boolean enabled = (file != null && CvsUtil.fileIsUnderCvs(file));
+        ae.getPresentation().setEnabledAndVisible(enabled);
+    }
 
     public void actionPerformed(AnActionEvent ae) {
         Project project = null;
