@@ -28,7 +28,7 @@
       <p>Uses <a href="http://p.yusukekamiyamane.com/">Fugue Icons</a></p>
   ]]>
   </description>
-  <version>2.42</version>
+  <version>2.43</version>
   <vendor url="https://github.com/zielu/CVSRevisionGraphPluginPlus" 
           logo="/org/cvstoolbox/graph/images/graph_24.png" email="cvstoolbox@gmail.com">Łukasz Zieliński</vendor>
   <category>VCS Integration</category>
@@ -46,11 +46,17 @@
       <add-to-group group-id="CvsFilePopupGroup" anchor="last"/>
     </action>
   </actions>
-  <idea-version since-build="114.000"/>
+  <idea-version since-build="129.298"/>
   <helpset file="CVSRevisionGraphPlusHelp.jar" path="/helpset.hs" />
   <change-notes>
     <![CDATA[
     <ul>
+      <li>2.43
+        <ol>
+          <li>Darcula alignment</li>
+          <li>Action enabled only for files</li>
+        </ol>
+      </li>
       <li>2.42
         <ol>
           <li>Action enabled only for files under CVS</li>

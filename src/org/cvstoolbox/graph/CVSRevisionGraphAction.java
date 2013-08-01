@@ -35,7 +35,7 @@ public class CVSRevisionGraphAction extends AnAction {
     @Override
     public void update(AnActionEvent ae) {
         VirtualFile file = PlatformDataKeys.VIRTUAL_FILE.getData(ae.getDataContext());
-        boolean enabled = (file != null && CvsUtil.fileIsUnderCvs(file));
+        boolean enabled = (file != null && !file.isDirectory() && CvsUtil.fileIsUnderCvs(file));
         ae.getPresentation().setEnabledAndVisible(enabled);
     }
 

@@ -15,6 +15,8 @@
 
 package org.cvstoolbox.graph.util;
 
+import com.intellij.ui.JBColor;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
@@ -389,7 +391,7 @@ public class CalendarChooser extends JComponent {
         _dayOfWeek[i] = new JLabel(fmt.format(cal.getTime()).substring(0,1));
         _dayOfWeek[i].setHorizontalAlignment(SwingConstants.CENTER);
         if((day == Calendar.SATURDAY) || (day == Calendar.SUNDAY))
-          _dayOfWeek[i].setForeground(Color.red);
+          _dayOfWeek[i].setForeground(JBColor.red);
         add(_dayOfWeek[i]);
         day = (day % 7) + 1;
       }

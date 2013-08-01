@@ -50,6 +50,7 @@ import com.intellij.openapi.vcs.ui.ReplaceFileConfirmationDialog;
 import com.intellij.openapi.vcs.vfs.VcsFileSystem;
 import com.intellij.openapi.vcs.vfs.VcsVirtualFile;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
 import info.clearthought.layout.TableLayout;
@@ -379,7 +380,7 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
             if (mergeFromCell == null) {
                 continue;
             }
-            createEdge(mergeFromCell, cell, false, Color.red);
+            createEdge(mergeFromCell, cell, false, JBColor.red);
         }
     }
 
@@ -395,7 +396,7 @@ public class CVSRevisionGraph extends DialogWrapper implements GraphSelectionLis
         GraphConstants.setOpaque(retVal.getAttributes(), true);
         _g.getGraphLayoutCache().insert(retVal);
         if ((neighborCell != null) && (connected != CONNECT_TYPE.NO)) {
-            createEdge(neighborCell, retVal, connected == CONNECT_TYPE.HALF, Color.black);
+            createEdge(neighborCell, retVal, connected == CONNECT_TYPE.HALF, JBColor.black);
         }
         return (retVal);
     }

@@ -18,6 +18,7 @@ package org.cvstoolbox.graph;
 import com.intellij.cvsSupport2.history.CvsFileRevision;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.history.VcsFileRevision;
+import com.intellij.ui.JBColor;
 import info.clearthought.layout.TableLayout;
 import org.cvstoolbox.graph.revisions.BranchRevision;
 import org.jgraph.JGraph;
@@ -43,12 +44,25 @@ public class CVSRevisionGraphCellViewFactory extends DefaultCellViewFactory {
   public static final String DEAD_STATE = "dead";
   public static final int CELL_MARGIN = 3;
 
-  protected Color _branchColor = new Color(184,230,230);
-  protected Color _branchSelectedColor = new Color(51,128,128);
-  protected Color _revisionColor = new Color(185,230,184);
-  protected Color _revisionSelectedColor = new Color(53,128,51);
-  protected Color _revisionDeletedColor = new Color(218,230,218);
-  protected Color _revisionDeletedSelectedColor = new Color(109,128,108);
+  protected Color _branchColorRegular = new Color(184,230,230);
+  protected Color _branchColorDarcula = new Color(49, 108, 108);
+  protected Color _branchColor = new JBColor(_branchColorRegular, _branchColorDarcula);
+  protected Color _branchSelectedColorRegular = new Color(51,128,128);
+  protected Color _branchSelectedColorDarcula = new Color(109, 160, 181);
+  protected Color _branchSelectedColor = new JBColor(_branchSelectedColorRegular, _branchSelectedColorDarcula);
+  protected Color _revisionColorRegular = new Color(185,230,184);
+  protected Color _revisionColorDarcula = new Color(46, 93, 44);  
+  protected Color _revisionColor = new JBColor(_revisionColorRegular, _revisionColorDarcula);
+  protected Color _revisionSelectedColorRegular = new Color(53,128,51);
+  protected Color _revisionSelectedColorDarcula = new Color(82, 165, 82);
+  protected Color _revisionSelectedColor = new JBColor(_revisionSelectedColorRegular, _revisionSelectedColorDarcula);
+  protected Color _revisionDeletedColorRegular = new Color(218,230,218);
+  protected Color _revisionDeletedColorDarcula = new Color(70, 82, 75);
+  protected Color _revisionDeletedColor = new JBColor(_revisionDeletedColorRegular, _revisionDeletedColorDarcula);
+  protected Color _revisionDeletedSelectedColorRegular = new Color(109,128,108);
+  protected Color _revisionDeletedSelectedColorDarcula = new Color(193, 205, 193);
+  protected Color _revisionDeletedSelectedColor = new JBColor(_revisionDeletedSelectedColorRegular, 
+                                                                _revisionDeletedSelectedColorDarcula);
 
   protected RevisionVertexRenderer _revisionCellRenderer = null;
   protected BranchVertexRenderer _branchCellRenderer = null;
@@ -148,7 +162,7 @@ public class CVSRevisionGraphCellViewFactory extends DefaultCellViewFactory {
       tl.setHGap(5);
       tl.setVGap(5);
       _panel = new JPanel(tl);
-      _panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.black,1),BorderFactory.createEmptyBorder(CELL_MARGIN,CELL_MARGIN,CELL_MARGIN,CELL_MARGIN)));
+      _panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(JBColor.black,1),BorderFactory.createEmptyBorder(CELL_MARGIN,CELL_MARGIN,CELL_MARGIN,CELL_MARGIN)));
       _name = new JLabel();
       _panel.add(_name,"0,0,c,f");
       _revision = new JLabel();
@@ -169,12 +183,12 @@ public class CVSRevisionGraphCellViewFactory extends DefaultCellViewFactory {
       }
       if(selected) {
         _panel.setBackground(_branchSelectedColor);
-        _name.setForeground(Color.white);
-        _revision.setForeground(Color.white);
+        _name.setForeground(JBColor.white);
+        _revision.setForeground(JBColor.white);
       } else {
         _panel.setBackground(_branchColor);
-        _name.setForeground(Color.black);
-        _revision.setForeground(Color.black);
+        _name.setForeground(JBColor.black);
+        _revision.setForeground(JBColor.black);
       }
       return(_panel);
     }
@@ -234,9 +248,9 @@ public class CVSRevisionGraphCellViewFactory extends DefaultCellViewFactory {
       else
         _revision.setText(rev.getRevisionNumber().asString());
       if(rev.getRevisionNumber().asString().equals(_currentRevision))
-        _panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.black,4),BorderFactory.createEmptyBorder(CELL_MARGIN,CELL_MARGIN,CELL_MARGIN,CELL_MARGIN)));
+        _panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(JBColor.black,4),BorderFactory.createEmptyBorder(CELL_MARGIN,CELL_MARGIN,CELL_MARGIN,CELL_MARGIN)));
       else
-        _panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.black,1),BorderFactory.createEmptyBorder(CELL_MARGIN,CELL_MARGIN,CELL_MARGIN,CELL_MARGIN)));
+        _panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(JBColor.black,1),BorderFactory.createEmptyBorder(CELL_MARGIN,CELL_MARGIN,CELL_MARGIN,CELL_MARGIN)));
       _author.setText(rev.getAuthor());
       if(selected) {
         if(isDead) {
@@ -246,10 +260,10 @@ public class CVSRevisionGraphCellViewFactory extends DefaultCellViewFactory {
           _panel.setBackground(_revisionSelectedColor);
           _ta.setBackground(_revisionSelectedColor);
         }
-        _revision.setForeground(Color.white);
-        _author.setForeground(Color.white);
-        _sep.setForeground(Color.white);
-        _ta.setForeground(Color.white);
+        _revision.setForeground(JBColor.white);
+        _author.setForeground(JBColor.white);
+        _sep.setForeground(JBColor.white);
+        _ta.setForeground(JBColor.white);
       } else {
         if(isDead) {
           _panel.setBackground(_revisionDeletedColor);
@@ -258,10 +272,10 @@ public class CVSRevisionGraphCellViewFactory extends DefaultCellViewFactory {
           _panel.setBackground(_revisionColor);
           _ta.setBackground(_revisionColor);
         }
-        _revision.setForeground(Color.black);
-        _author.setForeground(Color.black);
-        _sep.setForeground(Color.black);
-        _ta.setForeground(Color.black);
+        _revision.setForeground(JBColor.black);
+        _author.setForeground(JBColor.black);
+        _sep.setForeground(JBColor.black);
+        _ta.setForeground(JBColor.black);
       }
       //Add separator
       if((revLabels != null) && (revLabels.size() > 0)) {

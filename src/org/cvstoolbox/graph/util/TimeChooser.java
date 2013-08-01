@@ -15,6 +15,7 @@
 
 package org.cvstoolbox.graph.util;
 
+import com.intellij.ui.JBColor;
 import org.cvstoolbox.graph.CVSRevisionGraph;
 
 import javax.swing.JButton;
@@ -29,7 +30,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -265,9 +265,9 @@ public class TimeChooser extends JComponent {
       Font f = new Font("Serif",Font.PLAIN,FONT_SIZE);
       g2d.setFont(f);
       if(isEnabled())
-        g2d.setColor(Color.black);
+        g2d.setColor(JBColor.black);
       else
-        g2d.setColor(Color.gray);
+        g2d.setColor(JBColor.gray);
       FontRenderContext frc = g2d.getFontRenderContext();
       AffineTransform origTransform = g2d.getTransform();
 
@@ -313,7 +313,7 @@ public class TimeChooser extends JComponent {
       //Reset transformation
       g2d.setTransform(origTransform);
       //Draw hour
-      g2d.setColor(Color.blue);
+      g2d.setColor(JBColor.blue);
       t = AffineTransform.getRotateInstance((Math.PI / 360.0) * ((h * 60.0) + m),cx,cy);
       g2d.transform(t);
       Line2D.Double hl = new Line2D.Double(cx,cy,cx,cy - (HOUR_PERCENT * r));
@@ -329,7 +329,7 @@ public class TimeChooser extends JComponent {
       g2d.setTransform(origTransform);
       g2d.setStroke(new BasicStroke(THIN_STROKE_WIDTH,BasicStroke.CAP_ROUND,BasicStroke.JOIN_BEVEL));
       //Draw second
-      g2d.setColor(Color.red);
+      g2d.setColor(JBColor.red);
       t = AffineTransform.getRotateInstance((Math.PI / 30.0) * s,cx,cy);
       g2d.transform(t);
       Line2D.Double sl = new Line2D.Double(cx,cy,cx,cy - (SECOND_PERCENT * r));
